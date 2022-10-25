@@ -1,0 +1,49 @@
+version: '3.1'
+
+services:
+#  api:
+#    container_name: wasted-app
+#    restart: unless-stopped
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      args:
+#        - NODE_ENV=development
+#    env_file:
+#      - .env
+#    ports:
+#      - "127.0.0.1:3000:3000"
+#    depends_on:
+#      - postgres
+#      - mongo
+#    links:
+#      - postgres:postgres
+#    volumes:
+#      - .:/home/node
+#    command: npm run start:nodemon
+
+  postgres:
+    container_name: node-mailer-postgres
+    image: postgres
+    restart: unless-stopped
+    ports:
+      - 5444:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mails
+    volumes:
+      - ./docker/_data/postgresql:/var/lib/postgresql/data
+
+#  pgadmin:
+#    container_name: wasted_pgadmin
+#    image: dpage/pgadmin4
+#    restart: unless-stopped
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-root@mail.ru}
+#      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-root}
+#      PGADMIN_CONFIG_SERVER_MODE: 'False'
+#    volumes:
+#      - ./docker/_data/pgAdmin:/root/.pgadmin
+#    ports:
+#      - 5050:80
