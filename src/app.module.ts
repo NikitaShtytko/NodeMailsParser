@@ -1,3 +1,5 @@
+import { ImapService } from './imap/imap.service';
+import { ImapController } from './imap/imap.controller';
 import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';

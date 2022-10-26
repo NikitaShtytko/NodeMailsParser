@@ -4,6 +4,6 @@ import { ImapService } from './imap.service';
 
 @Module({
   controllers: [ImapController],
-  providers: [ImapService]
+  providers: [ImapService],
 })
 export class ImapModule {}
