@@ -28,14 +28,22 @@ export class ImapService {
                 simpleParser(stream, async (error, parsed) => {
                   const { from, subject, text } = parsed;
                   const { name, address, group } = from.value[0];
-                  //
+                  let isThereGroup;
+
+                  if (group) {
+                    isThereGroup = group;
+                  } else {
+                    isThereGroup = 'No group';
+                  }
+
                   const email = {
                     name,
                     subject,
                     address,
                     text,
-                    group,
+                    group: isThereGroup,
                   };
+                  console.log(email);
                   /* Make API call to save the data
                        Save the retrieved data into a database.
                        E.t.c
