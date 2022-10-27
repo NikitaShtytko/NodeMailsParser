@@ -15,6 +15,6 @@ export class InboxEmail {
   @Column()
   address: string;
 
-  @Column({ nullable: true })
-  text: EmailAddress[];
+  // @Column({ nullable: true })
+  // text: EmailAddress[];
 }

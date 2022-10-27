@@ -1,5 +1,5 @@
-import { ImapService } from './imap.service';
 import { Controller, Get } from '@nestjs/common';
+import { ImapService } from '../service/imap.service';
 
 @Controller('imap')
 export class ImapController {

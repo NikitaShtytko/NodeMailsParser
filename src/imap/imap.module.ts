@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ImapController } from './imap.controller';
-import { ImapService } from './imap.service';
+import { RepositoryModule } from 'src/repository/repository.module';
+import { ImapController } from './controller/imap.controller';
+import { ImapService } from './service/imap.service';
 
 @Module({
+  imports: [RepositoryModule],
   controllers: [ImapController],
   providers: [ImapService],
 })

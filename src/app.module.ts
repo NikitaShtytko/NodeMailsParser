@@ -5,17 +5,17 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { databaseConfigService } from './config/config.service';
 import { ConfigModule } from '@nestjs/config';
+import { RepositoryModule } from './repository/repository.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(databaseConfigService.getTypeOrmConfig()),
+    RepositoryModule,
     ImapModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports: [AppService],
 })
 export class AppModule {}

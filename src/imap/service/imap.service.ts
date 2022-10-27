@@ -2,12 +2,17 @@ import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import * as Imap from 'imap';
 import { simpleParser } from 'mailparser';
+import { ImapRepository } from 'src/repository/imap.repository';
 
 @Injectable()
 export class ImapService {
-  constructor(private readonly configService: ConfigService) {}
+  constructor(
+    private readonly emailRepository: ImapRepository,
+    private readonly configService: ConfigService,
+  ) {}
 
-  getAllEmail() {
+  async getAllEmail() {
+    return await this.emailRepository.getAll();
     const imapConfig = {
       user: this.configService.get('GOOGLE_USER'),
       password: this.configService.get('GOOGLE_APP_PASSWORD'),
