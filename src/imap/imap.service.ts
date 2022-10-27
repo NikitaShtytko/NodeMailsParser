@@ -17,10 +17,8 @@ export class ImapService {
       tls: true,
     };
     const imap = new Imap(imapConfig);
-    const result = [];
 
     try {
-      console.log('1');
       imap.once('ready', () => {
         imap.openBox('INBOX', false, () => {
           imap.search(['ALL'], (error, results) => {
@@ -28,20 +26,20 @@ export class ImapService {
             f.on('message', (message) => {
               message.on('body', (stream) => {
                 simpleParser(stream, async (error, parsed) => {
-                  const { from, subject, textAsHtml, text } = parsed;
-                  console.log(parsed);
-                  result.push({ parsed });
+                  const { from, subject, text } = parsed;
+                  const { name, address, group } = from.value[0];
+                  //
+                  const email = {
+                    name,
+                    subject,
+                    address,
+                    text,
+                    group,
+                  };
                   /* Make API call to save the data
                        Save the retrieved data into a database.
                        E.t.c
                     */
-                });
-              });
-              message.once('attributes', (attributes) => {
-                const { uid } = attributes;
-                imap.addFlags(uid, ['\\Seen'], () => {
-                  // Mark the email as read after reading it
-                  console.log('Marked as read!');
                 });
               });
             });
@@ -69,7 +67,5 @@ export class ImapService {
       console.error(ex.message);
       console.log('an error occurred');
     }
-
-    return result;
   }
 }
