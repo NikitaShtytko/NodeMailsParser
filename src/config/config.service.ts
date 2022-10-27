@@ -1,5 +1,4 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { JwtModuleOptions } from '@nestjs/jwt';
 import { EntityClassOrSchema } from '@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type';
 import * as dotenv from 'dotenv';
 
@@ -57,15 +56,6 @@ class ConfigService {
   public getEntitiesArray(): EntityClassOrSchema[] {
     return [];
   }
-
-  public getAuthConfig(): JwtModuleOptions {
-    return {
-      secret: this.getValue('SECRET_KEY'),
-      signOptions: {
-        expiresIn: `${parseInt(this.getValue('TOKEN_LIVE_TIME'))}s`,
-      },
-    };
-  }
 }
 
 const databaseConfigService = new ConfigService(process.env).ensureValues([
@@ -76,9 +66,4 @@ const databaseConfigService = new ConfigService(process.env).ensureValues([
   'POSTGRES_DATABASE',
 ]);
 
-const authConfigService = new ConfigService(process.env).ensureValues([
-  'SECRET_KEY',
-  'TOKEN_LIVE_TIME',
-]);
-
-export { databaseConfigService, authConfigService };
+export { databaseConfigService };
