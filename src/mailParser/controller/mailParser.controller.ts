@@ -1,11 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
 import { mailParserService } from '../service/mailParser.service';
 
-@Controller('imap')
+@Controller('get')
 export class mailParserController {
   constructor(private readonly imapService: mailParserService) {}
 
-  @Get('/emails')
+  @Get('/inboxEmails')
   readAllEmailsAndSave() {
     return this.imapService.readAllEmailsAndSave();
   }
