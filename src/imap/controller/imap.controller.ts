@@ -6,7 +6,7 @@ export class ImapController {
   constructor(private readonly imapService: ImapService) {}
 
   @Get('/emails')
-  getAllEmail() {
-    return this.imapService.getAllEmail();
+  readAllEmailsAndSave() {
+    return this.imapService.readAllEmailsAndSave();
   }
 }
