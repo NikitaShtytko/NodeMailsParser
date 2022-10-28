@@ -13,7 +13,10 @@ export class InboxEmail {
   subject: string;
 
   @Column()
-  email: string;
+  from: string;
+
+  @Column()
+  date: Date;
 
   // @Column({ nullable: true })
   // text: EmailAddress[];
