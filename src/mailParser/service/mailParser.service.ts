@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { simpleParser } from 'mailparser';
 import * as Imap from 'imap';
-import { ImapRepository } from 'src/repository/imap.repository';
+import { mailParserRepository } from 'src/repository/mailParser.repository';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class mailParserService {
   constructor(
-    private readonly emailRepository: ImapRepository,
+    private readonly emailRepository: mailParserRepository,
     private readonly configService: ConfigService,
   ) {}
 

@@ -4,7 +4,7 @@ import { InboxEmail } from 'src/mailParser/entities/email.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class ImapRepository {
+export class mailParserRepository {
   constructor(
     @InjectRepository(InboxEmail)
     private readonly inboxEmailRepository: Repository<InboxEmail>,
