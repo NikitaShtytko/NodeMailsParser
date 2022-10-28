@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { EntityClassOrSchema } from '@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type';
 import * as dotenv from 'dotenv';
-import { InboxEmail } from 'src/imap/entities/email.entity';
+import { InboxEmail } from 'src/mailParser/entities/email.entity';
 
 dotenv.config();
 

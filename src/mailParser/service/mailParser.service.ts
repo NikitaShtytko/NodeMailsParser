@@ -1,18 +1,17 @@
-import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
-import * as Imap from 'imap';
 import { simpleParser } from 'mailparser';
+import * as Imap from 'imap';
 import { ImapRepository } from 'src/repository/imap.repository';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class ImapService {
+export class mailParserService {
   constructor(
     private readonly emailRepository: ImapRepository,
     private readonly configService: ConfigService,
   ) {}
 
-  async getAllEmail() {
-    return await this.emailRepository.getAll();
+  async readAllEmailsAndSave() {
     const imapConfig = {
       user: this.configService.get('GOOGLE_USER'),
       password: this.configService.get('GOOGLE_APP_PASSWORD'),
@@ -34,18 +33,19 @@ export class ImapService {
                   const { from, subject, text } = parsed;
                   const { name, address, group } = from.value[0];
 
-                  const email = {
+                  const inboxEmail = {
                     name,
                     subject,
-                    address,
+                    email: address,
                     text,
-                    group,
+                    // group,
                   };
-                  console.log(email);
+                  console.log(inboxEmail);
                   /* Make API call to save the data
                        Save the retrieved data into a database.
                        E.t.c
                     */
+                  this.emailRepository.saveEmails(inboxEmail);
                 });
               });
             });

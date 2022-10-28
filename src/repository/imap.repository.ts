@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { InboxEmail } from 'src/imap/entities/email.entity';
+import { InboxEmail } from 'src/mailParser/entities/email.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -10,7 +10,7 @@ export class ImapRepository {
     private readonly inboxEmailRepository: Repository<InboxEmail>,
   ) {}
 
-  public async getAll(): Promise<InboxEmail[]> {
-    return this.inboxEmailRepository.find();
+  public async saveEmails(inboxEmail: InboxEmail): Promise<InboxEmail> {
+    return await this.inboxEmailRepository.save(inboxEmail);
   }
 }

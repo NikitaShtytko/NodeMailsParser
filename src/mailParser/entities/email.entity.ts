@@ -1,10 +1,10 @@
 import { EmailAddress } from 'mailparser';
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('Email')
+@Entity('InboxEmail')
 export class InboxEmail {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column()
   name: string;
@@ -13,7 +13,7 @@ export class InboxEmail {
   subject: string;
 
   @Column()
-  address: string;
+  email: string;
 
   // @Column({ nullable: true })
   // text: EmailAddress[];

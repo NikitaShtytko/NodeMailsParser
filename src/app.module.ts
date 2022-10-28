@@ -1,4 +1,4 @@
-import { ImapModule } from './imap/imap.module';
+import { mailParserModule } from './mailParser/mailParser.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,7 +12,7 @@ import { RepositoryModule } from './repository/repository.module';
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(databaseConfigService.getTypeOrmConfig()),
     RepositoryModule,
-    ImapModule,
+    mailParserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
